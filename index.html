@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HERE - Abadikan Setiap Langkah.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* New Bold Palette */
+            --primary: #FF6B35; /* Vibrant Coral - Aggressive & Warm */
+            --secondary: #00C49A; /* Bright Teal - Fresh & Tech */
+            --dark: #1A1A2E;
+            --light: #F4F7F6;
+            --gradient-primary: linear-gradient(135deg, var(--primary), #FF8E53);
+            --gradient-secondary: linear-gradient(135deg, var(--secondary), #2dd4bf);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+            color: var(--dark);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* UTILITIES */
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+        .text-center { text-align: center; }
+        .bold { font-weight: 800; }
+        .highlight { color: var(--primary); }
+        
+        .btn {
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(0, 196, 154, 0.1);
+            color: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* NAVIGATION */
+        nav {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 28px;
+            font-style: italic;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 100px 0;
+            /* Background pattern abstract map */
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff6b35' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            display: flex;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        /* === NEW SECTION: GROWTH TRAIL (JEJAK) === */
+        .trail-section {
+            padding: 80px 0;
+            background: linear-gradient(to bottom, #fff, var(--light));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trail-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* The Timeline Container */
+        .growth-timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+            padding: 40px 0;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* The dashed line connector */
+        .growth-timeline::before {
+            content: '';
+            position: absolute;
+            top: 75px; /* Adjust based on icon size */
+            left: 50px;
+            right: 50px;
+            height: 4px;
+            background-image: linear-gradient(to right, var(--primary) 60%, rgba(255,255,255,0) 0%);
+            background-position: bottom;
+            background-size: 20px 4px;
+            background-repeat: repeat-x;
+            z-index: 0;
+        }
+
+        /* Individual Point */
+        .timeline-point {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex: 1;
+        }
+
+        .point-icon-box {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+            margin-bottom: 20px;
+            border: 4px solid white;
+        }
+
+        .point-icon-box i {
+            font-size: 32px;
+            color: white;
+        }
+
+        .point-label {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+
+        .point-stage {
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* FEATURES GRID (5W1H Adaptation) */
+        .features-section {
+            padding: 100px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            border-color: var(--secondary);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 196, 154, 0.1);
+        }
+
+        /* Decorative blob on hover */
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 100px;
+            height: 100px;
+            background: var(--secondary);
+            opacity: 0.1;
+            border-radius: 50%;
+            transition: 0.5s;
+        }
+        .feature-card:hover::after {
+            transform: scale(3);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 196, 154, 0.1);
+            color: var(--secondary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 25px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+
+        /* CTA SECTION */
+        .cta-section {
+            padding: 100px 0;
+            background: var(--dark);
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff6b35' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            color: white;
+            text-align: center;
+            border-radius: 30px 30px 0 0;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            /* Stack timeline on small screens */
+            .growth-timeline {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-left: 20px;
+            }
+            .growth-timeline::before {
+                width: 4px;
+                height: auto;
+                top: 20px;
+                bottom: 20px;
+                left: 58px; /* Center with icon */
+                background-image: linear-gradient(to bottom, var(--primary) 60%, rgba(255,255,255,0) 0%);
+                background-size: 4px 20px;
+                background-repeat: repeat-y;
+            }
+            .timeline-point {
+                flex-direction: row;
+                margin-bottom: 40px;
+                text-align: left;
+            }
+            .point-icon-box {
+                margin-bottom: 0;
+                margin-right: 20px;
+            }
+            .trail-header h2 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="container">
+        <div class="logo">HERE.</div>
+        <div>
+            <a href="#investor" class="btn btn-secondary" style="padding: 10px 24px; font-size: 14px;">Proposal VC & Partner</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <div style="max-width: 700px;">
+                <span style="color: var(--primary); font-weight: 800; letter-spacing: 1px; text-transform: uppercase;">Milestone 2026</span>
+                <h1 class="bold">Life is a Journey.<br>Why Not <span class="highlight">Map It?</span></h1>
+                <p>Peta sosial yang hidup. Dari jejak langkah pertama anakmu, hingga kejutan promo di kafe favoritmu.</p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <a href="#" class="btn btn-primary"><i class="fab fa-google-play me-2"></i> Play Store (Beta)</a>
+                    <a href="#features" class="btn btn-secondary">Pelajari Fitur</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="trail-section text-center">
+        <div class="container">
+            <div class="trail-header">
+                <h2 class="bold">Setiap langkah adalah kenangan, <br><span class="highlight">Ayo Abadikan di Peta.</span></h2>
+                <p style="max-width: 600px; margin: 0 auto 60px; color: #666;">Jangan biarkan momen emas berlalu begitu saja. Di HERE, jejak fisik mereka menjadi kenangan digital yang abadi.</p>
+            </div>
+
+            <div class="growth-timeline">
+                <div class="timeline-point">
+                    <div class="point-icon-box">
+                        <i class="fas fa-baby"></i>
+                    </div>
+                    <div>
+                        <div class="point-label">Langkah Pertama</div>
+                        <div class="point-stage">Bayi Digendong</div>
+                    </div>
+                </div>
+
+                <div class="timeline-point">
+                    <div class="point-icon-box" style="animation-delay: 0.2s;">
+                        <i class="fas fa-child-reaching"></i>
+                    </div>
+                    <div>
+                        <div class="point-label">Eksplorasi Lantai</div>
+                        <div class="point-stage">Merangkak</div>
+                    </div>
+                </div>
+
+                <div class="timeline-point">
+                    <div class="point-icon-box" style="animation-delay: 0.4s;">
+                        <i class="fas fa-person-walking"></i>
+                    </div>
+                    <div>
+                        <div class="point-label">Menjelajah Dunia</div>
+                        <div class="point-stage">Berjalan Kaki</div>
+                    </div>
+                </div>
+
+                <div class="timeline-point">
+                    <div class="point-icon-box" style="animation-delay: 0.6s;">
+                        <i class="fas fa-bicycle"></i>
+                    </div>
+                    <div>
+                        <div class="point-label">Petualangan Mandiri</div>
+                        <div class="point-stage">Naik Sepeda</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="features" class="features-section container">
+        <div class="text-center">
+            <h2 class="bold" style="font-size: 2.2rem;">Lebih Dari Sekadar Peta.</h2>
+            <p style="color: #666; margin-top: 10px;">Ekosistem sosial yang menggabungkan dunia fisik dan digital.</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="card-icon"><i class="fas fa-bolt"></i></div>
+                <h3>Gravity Feed</h3>
+                <p>Algoritma yang "menarik" konten berdasarkan kedekatan lokasi dan hubungan. Feedmu selalu relevan dengan posisimu saat ini.</p>
+            </div>
+            <div class="feature-card">
+                <div class="card-icon"><i class="fas fa-trophy"></i></div>
+                <h3>GenRank Gamification</h3>
+                <p>Jadilah legenda lokal. Naikkan level dari Gen 1 ke Gen 10 dengan aktif membuat jejak dan berinteraksi.</p>
+            </div>
+            <div class="feature-card">
+                <div class="card-icon"><i class="fas fa-store"></i></div>
+                <h3>Merchant & Promo</h3>
+                <p>Temukan kejutan promo yang di-airdrop oleh bisnis di sekitarmu. Aman dengan sistem Double Wallet.</p>
+            </div>
+            <div class="feature-card">
+                <div class="card-icon"><i class="fas fa-user-shield"></i></div>
+                <h3>Privacy Badge</h3>
+                <p>Kontrol penuh atas jejakmu. Tentukan apakah ini untuk Publik, Teman, Close Friend, atau Rahasia Pribadi.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="investor" class="cta-section">
+        <div class="container" style="max-width: 800px;">
+            <h2 class="bold" style="font-size: 2.5rem; margin-bottom: 20px;">Membangun Masa Depan <span style="color: var(--primary);">Location-Based Social.</span></h2>
+            <p style="font-size: 1.2rem; margin-bottom: 40px; opacity: 0.9;">HERE mengubah data lokasi menjadi aset sosial dan ekonomi yang bernilai tinggi. Mari berdiskusi tentang peluang investasi.</p>
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                <a href="mailto:founder@goentech.com" class="btn btn-primary" style="background: white; color: var(--primary);">Hubungi Founder</a>
+                <a href="#" class="btn btn-secondary" style="border: 2px solid var(--secondary); background: transparent;">Download Pitch Deck</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center" style="padding: 40px 0; color: #888; font-size: 14px;">
+        <div class="container">
+            <div class="logo" style="font-size: 20px; margin-bottom: 10px;">HERE.</div>
+            <p>© 2026 Goen Technologia. Independence in every step.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

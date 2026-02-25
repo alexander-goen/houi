@@ -3,430 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HERE - Abadikan Setiap Langkah.</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <title>HOUI - Melampaui Koordinat, Mengabadikan Cerita</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            /* New Bold Palette */
-            --primary: #FF6B35; /* Vibrant Coral - Aggressive & Warm */
-            --secondary: #00C49A; /* Bright Teal - Fresh & Tech */
-            --dark: #1A1A2E;
-            --light: #F4F7F6;
-            --gradient-primary: linear-gradient(135deg, var(--primary), #FF8E53);
-            --gradient-secondary: linear-gradient(135deg, var(--secondary), #2dd4bf);
+            --primary-brown: #5D4037; /* Cokelat Stabil */
+            --accent-red: #D32F2F; /* Pin Merah / Detak Jantung */
+            --secondary-teal: #00C49A;
+            --dark: #2C2C2C;
+            --light-tan: #F9F7F2;
+            --white: #FFFFFF;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-
-        body {
-            background-color: #fff;
-            color: var(--dark);
-            line-height: 1.5;
-            overflow-x: hidden;
-        }
-
-        /* UTILITIES */
-        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
-        .text-center { text-align: center; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; }
+        body { background-color: var(--white); color: var(--dark); line-height: 1.8; }
+        .container { width: 90%; max-width: 1100px; margin: 0 auto; }
         .bold { font-weight: 800; }
-        .highlight { color: var(--primary); }
-        
-        .btn {
-            padding: 14px 32px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            display: inline-block;
-            border: none;
-            cursor: pointer;
-        }
+        .text-center { text-align: center; }
 
-        .btn-primary {
-            background: var(--gradient-primary);
-            color: white;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
-        }
+        nav { padding: 25px 0; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid #eee; }
+        .logo { font-weight: 900; font-size: 28px; letter-spacing: -1px; color: var(--primary-brown); display: flex; align-items: center; }
+        .logo span { color: var(--accent-red); margin-right: 2px; }
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
-        }
+        /* HERO */
+        .hero { padding: 100px 0 60px; background: linear-gradient(180deg, var(--light-tan) 0%, #fff 100%); }
+        .hero h1 { font-size: 3.8rem; line-height: 1.1; margin-bottom: 25px; color: var(--primary-brown); }
 
-        .btn-secondary {
-            background: rgba(0, 196, 154, 0.1);
-            color: var(--secondary);
-        }
-        
-        .btn-secondary:hover {
-            background: var(--secondary);
-            color: white;
-        }
+        /* PHILOSOPHY SECTION (NEW) */
+        .philosophy { padding: 80px 0; background: var(--white); }
+        .philosophy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .philosophy-text h2 { color: var(--primary-brown); font-size: 2.2rem; margin-bottom: 20px; line-height: 1.3; }
+        .philosophy-text p { margin-bottom: 20px; color: #555; font-size: 1.05rem; }
 
-        /* NAVIGATION */
-        nav {
-            padding: 20px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: white;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-        }
+        /* MEMORY MAP SECTION */
+        .memory-section { padding: 100px 0; background: var(--light-tan); position: relative; overflow: hidden; }
+        .map-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1; background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Java_Physical_Map.svg/1200px-Java_Physical_Map.svg.png') center/cover; pointer-events: none; }
+        .polaroid-container { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 40px; position: relative; z-index: 2; }
+        .polaroid { background: white; padding: 12px 12px 35px 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 220px; transform: rotate(var(--r)); border: 1px solid #eee; }
+        .polaroid img { width: 100%; height: 180px; object-fit: cover; filter: sepia(0.2); }
+        .polaroid-caption { font-family: 'Inter'; font-size: 13px; font-weight: 700; margin-top: 15px; text-align: center; color: var(--primary-brown); }
 
-        .logo {
-            font-weight: 900;
-            font-size: 28px;
-            font-style: italic;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        /* FEATURES SECTION */
+        .features { padding: 90px 0; background: var(--primary-brown); color: var(--white); }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 30px; margin-top: 50px; }
+        .feature-card { padding: 40px; background: rgba(255,255,255,0.05); border-radius: 20px; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1); }
+        .feature-card:hover { transform: translateY(-10px); background: rgba(255,255,255,0.1); }
+        .feature-card i { font-size: 2.5rem; color: var(--secondary-teal); margin-bottom: 20px; }
 
-        /* HERO SECTION */
-        .hero {
-            padding: 100px 0;
-            /* Background pattern abstract map */
-            background-color: #ffffff;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff6b35' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            display: flex;
-            align-items: center;
-        }
+        /* MILESTONE SECTION */
+        .milestone-section { padding: 100px 0; background: var(--white); }
+        .timeline { position: relative; max-width: 850px; margin: 60px auto; }
+        .timeline::after { content: ''; position: absolute; width: 2px; background: #E0E0E0; top: 0; bottom: 0; left: 50%; }
+        .milestone-item { padding: 20px 50px; position: relative; width: 50%; box-sizing: border-box; }
+        .milestone-item::after { content: ''; position: absolute; width: 16px; height: 16px; right: -8px; background: var(--accent-red); top: 30px; border-radius: 50%; z-index: 1; border: 4px solid white; }
+        .left { left: 0; text-align: right; }
+        .right { left: 50%; }
+        .right::after { left: -8px; }
+        .m-content { padding: 30px; background: var(--light-tan); border-radius: 20px; }
+        .m-date { font-weight: 800; color: var(--accent-red); display: block; margin-bottom: 10px; }
 
-        .hero h1 {
-            font-size: 4rem;
-            line-height: 1.1;
-            margin-bottom: 20px;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            color: #666;
-            margin-bottom: 40px;
-            max-width: 600px;
-        }
-
-        /* === NEW SECTION: GROWTH TRAIL (JEJAK) === */
-        .trail-section {
-            padding: 80px 0;
-            background: linear-gradient(to bottom, #fff, var(--light));
-            position: relative;
-            overflow: hidden;
-        }
-
-        .trail-header h2 {
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* The Timeline Container */
-        .growth-timeline {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            position: relative;
-            padding: 40px 0;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        /* The dashed line connector */
-        .growth-timeline::before {
-            content: '';
-            position: absolute;
-            top: 75px; /* Adjust based on icon size */
-            left: 50px;
-            right: 50px;
-            height: 4px;
-            background-image: linear-gradient(to right, var(--primary) 60%, rgba(255,255,255,0) 0%);
-            background-position: bottom;
-            background-size: 20px 4px;
-            background-repeat: repeat-x;
-            z-index: 0;
-        }
-
-        /* Individual Point */
-        .timeline-point {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            flex: 1;
-        }
-
-        .point-icon-box {
-            width: 80px;
-            height: 80px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
-            margin-bottom: 20px;
-            border: 4px solid white;
-        }
-
-        .point-icon-box i {
-            font-size: 32px;
-            color: white;
-        }
-
-        .point-label {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--dark);
-        }
-
-        .point-stage {
-            font-size: 0.9rem;
-            color: var(--primary);
-            font-weight: 600;
-            margin-top: 5px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* FEATURES GRID (5W1H Adaptation) */
-        .features-section {
-            padding: 100px 0;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card:hover {
-            border-color: var(--secondary);
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 196, 154, 0.1);
-        }
-
-        /* Decorative blob on hover */
-        .feature-card::after {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 100px;
-            height: 100px;
-            background: var(--secondary);
-            opacity: 0.1;
-            border-radius: 50%;
-            transition: 0.5s;
-        }
-        .feature-card:hover::after {
-            transform: scale(3);
-        }
-
-        .card-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(0, 196, 154, 0.1);
-            color: var(--secondary);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin-bottom: 25px;
-        }
-
-        .feature-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-        }
-
-
-        /* CTA SECTION */
-        .cta-section {
-            padding: 100px 0;
-            background: var(--dark);
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff6b35' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            color: white;
-            text-align: center;
-            border-radius: 30px 30px 0 0;
-        }
-
-        /* RESPONSIVE */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.8rem; }
-            /* Stack timeline on small screens */
-            .growth-timeline {
-                flex-direction: column;
-                align-items: flex-start;
-                padding-left: 20px;
-            }
-            .growth-timeline::before {
-                width: 4px;
-                height: auto;
-                top: 20px;
-                bottom: 20px;
-                left: 58px; /* Center with icon */
-                background-image: linear-gradient(to bottom, var(--primary) 60%, rgba(255,255,255,0) 0%);
-                background-size: 4px 20px;
-                background-repeat: repeat-y;
-            }
-            .timeline-point {
-                flex-direction: row;
-                margin-bottom: 40px;
-                text-align: left;
-            }
-            .point-icon-box {
-                margin-bottom: 0;
-                margin-right: 20px;
-            }
-            .trail-header h2 { font-size: 1.8rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .philosophy-grid { grid-template-columns: 1fr; }
+            .timeline::after { left: 31px; }
+            .milestone-item { width: 100%; padding-left: 70px; text-align: left; }
+            .milestone-item::after { left: 22px; }
+            .right { left: 0; }
         }
+
+        footer { padding: 60px 0; background: #1A1A1A; color: #888; border-top: 1px solid #333; }
+        .btn-admin { padding: 10px 20px; border: 2px solid var(--primary-brown); border-radius: 12px; text-decoration: none; color: var(--primary-brown); font-weight: 700; font-size: 14px; transition: 0.3s; }
+        .btn-admin:hover { background: var(--primary-brown); color: white; }
     </style>
 </head>
 <body>
 
     <nav class="container">
-        <div class="logo">HERE.</div>
-        <div>
-            <a href="#investor" class="btn btn-secondary" style="padding: 10px 24px; font-size: 14px;">Proposal VC & Partner</a>
-        </div>
+        <div class="logo"><span><i class="fas fa-map-marker-alt"></i></span>HOUI</div>
+        <a href="admin.html" class="btn-admin">Investor Portal</a>
     </nav>
 
-    <header class="hero">
+    <header class="hero text-center">
         <div class="container">
-            <div style="max-width: 700px;">
-                <span style="color: var(--primary); font-weight: 800; letter-spacing: 1px; text-transform: uppercase;">Milestone 2026</span>
-                <h1 class="bold">Life is a Journey.<br>Why Not <span class="highlight">Map It?</span></h1>
-                <p>Peta sosial yang hidup. Dari jejak langkah pertama anakmu, hingga kejutan promo di kafe favoritmu.</p>
-                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                    <a href="#" class="btn btn-primary"><i class="fab fa-google-play me-2"></i> Play Store (Beta)</a>
-                    <a href="#features" class="btn btn-secondary">Pelajari Fitur</a>
-                </div>
-            </div>
+            <h1 class="bold">Melampaui Koordinat,<br>Mengabadikan Cerita.</h1>
+            <p style="max-width: 800px; margin: 0 auto; font-size: 1.2rem; color: #666;">
+                Masa depan koneksi sosial terletak pada bagaimana kita menghargai jejak yang kita tinggalkan di dunia nyata.
+            </p>
         </div>
     </header>
 
-    <section class="trail-section text-center">
+    <section class="philosophy">
         <div class="container">
-            <div class="trail-header">
-                <h2 class="bold">Setiap langkah adalah kenangan, <br><span class="highlight">Ayo Abadikan di Peta.</span></h2>
-                <p style="max-width: 600px; margin: 0 auto 60px; color: #666;">Jangan biarkan momen emas berlalu begitu saja. Di HERE, jejak fisik mereka menjadi kenangan digital yang abadi.</p>
-            </div>
-
-            <div class="growth-timeline">
-                <div class="timeline-point">
-                    <div class="point-icon-box">
-                        <i class="fas fa-baby"></i>
-                    </div>
-                    <div>
-                        <div class="point-label">Langkah Pertama</div>
-                        <div class="point-stage">Bayi Digendong</div>
-                    </div>
+            <div class="philosophy-grid">
+                <div class="philosophy-text">
+                    <h2>HOUI: Lebih dari Sekadar Titik di GPS</h2>
+                    <p>HOUI lahir dari visi <strong>Goen Technologia</strong> untuk melihat bumi bukan sekadar hamparan koordinat angka, melainkan sebuah ruang luas yang penuh dengan makna dan arah. Terinspirasi dari filosofi kompas dan kehangatan tanah, kami membangun aplikasi sosial berbasis peta yang merayakan setiap langkah perjalanan manusia.</p>
+                    <p>Bagi keluarga muda dan generasi milenial, sebuah lokasi adalah saksi bisu dari kenangan yang berharga. Melalui teknologi Geohash yang presisi, HOUI memungkinkan Anda menemukan dan menyimpan momen tersebut secara personal.</p>
                 </div>
-
-                <div class="timeline-point">
-                    <div class="point-icon-box" style="animation-delay: 0.2s;">
-                        <i class="fas fa-child-reaching"></i>
-                    </div>
-                    <div>
-                        <div class="point-label">Eksplorasi Lantai</div>
-                        <div class="point-stage">Merangkak</div>
-                    </div>
-                </div>
-
-                <div class="timeline-point">
-                    <div class="point-icon-box" style="animation-delay: 0.4s;">
-                        <i class="fas fa-person-walking"></i>
-                    </div>
-                    <div>
-                        <div class="point-label">Menjelajah Dunia</div>
-                        <div class="point-stage">Berjalan Kaki</div>
-                    </div>
-                </div>
-
-                <div class="timeline-point">
-                    <div class="point-icon-box" style="animation-delay: 0.6s;">
-                        <i class="fas fa-bicycle"></i>
-                    </div>
-                    <div>
-                        <div class="point-label">Petualangan Mandiri</div>
-                        <div class="point-stage">Naik Sepeda</div>
-                    </div>
+                <div style="background: var(--light-tan); padding: 40px; border-radius: 30px; border-left: 8px solid var(--accent-red);">
+                    <p style="font-style: italic; font-size: 1.1rem; color: var(--primary-brown);">
+                        "Pin merah di pusat logo kami adalah simbol dari detak jantung komunitas—sebuah penanda bahwa di setiap tempat yang Anda kunjungi, ada cerita yang layak untuk dihidupkan kembali."
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-
-    <section id="features" class="features-section container">
-        <div class="text-center">
-            <h2 class="bold" style="font-size: 2.2rem;">Lebih Dari Sekadar Peta.</h2>
-            <p style="color: #666; margin-top: 10px;">Ekosistem sosial yang menggabungkan dunia fisik dan digital.</p>
-        </div>
-        
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="card-icon"><i class="fas fa-bolt"></i></div>
-                <h3>Gravity Feed</h3>
-                <p>Algoritma yang "menarik" konten berdasarkan kedekatan lokasi dan hubungan. Feedmu selalu relevan dengan posisimu saat ini.</p>
-            </div>
-            <div class="feature-card">
-                <div class="card-icon"><i class="fas fa-trophy"></i></div>
-                <h3>GenRank Gamification</h3>
-                <p>Jadilah legenda lokal. Naikkan level dari Gen 1 ke Gen 10 dengan aktif membuat jejak dan berinteraksi.</p>
-            </div>
-            <div class="feature-card">
-                <div class="card-icon"><i class="fas fa-store"></i></div>
-                <h3>Merchant & Promo</h3>
-                <p>Temukan kejutan promo yang di-airdrop oleh bisnis di sekitarmu. Aman dengan sistem Double Wallet.</p>
-            </div>
-            <div class="feature-card">
-                <div class="card-icon"><i class="fas fa-user-shield"></i></div>
-                <h3>Privacy Badge</h3>
-                <p>Kontrol penuh atas jejakmu. Tentukan apakah ini untuk Publik, Teman, Close Friend, atau Rahasia Pribadi.</p>
+    <section class="memory-section">
+        <div class="map-overlay"></div>
+        <div class="container text-center" style="position:relative; z-index:2;">
+            <h2 class="bold" style="color: var(--primary-brown); font-size: 2rem;">Setiap Langkah adalah Kenangan</h2>
+            <div class="polaroid-container">
+                <div class="polaroid" style="--r: -3deg;">
+                    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba" alt="Memory">
+                    <div class="polaroid-caption">Langkah Pertama</div>
+                </div>
+                <div class="polaroid" style="--r: 2deg;">
+                    <img src="https://images.unsplash.com/photo-1502086223501-7ea24ec838e4" alt="Memory">
+                    <div class="polaroid-caption">Taman Bermain</div>
+                </div>
+                <div class="polaroid" style="--r: -2deg;">
+                    <img src="https://images.unsplash.com/photo-1491013516836-7db643ee125a" alt="Memory">
+                    <div class="polaroid-caption">Sepeda Baru</div>
+                </div>
+                <div class="polaroid" style="--r: 4deg;">
+                    <img src="https://images.unsplash.com/photo-1503919919749-646dd413442a" alt="Memory">
+                    <div class="polaroid-caption">Hari Pertama SD</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="investor" class="cta-section">
-        <div class="container" style="max-width: 800px;">
-            <h2 class="bold" style="font-size: 2.5rem; margin-bottom: 20px;">Membangun Masa Depan <span style="color: var(--primary);">Location-Based Social.</span></h2>
-            <p style="font-size: 1.2rem; margin-bottom: 40px; opacity: 0.9;">HERE mengubah data lokasi menjadi aset sosial dan ekonomi yang bernilai tinggi. Mari berdiskusi tentang peluang investasi.</p>
-            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-                <a href="mailto:founder@goentech.com" class="btn btn-primary" style="background: white; color: var(--primary);">Hubungi Founder</a>
-                <a href="#" class="btn btn-secondary" style="border: 2px solid var(--secondary); background: transparent;">Download Pitch Deck</a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="text-center" style="padding: 40px 0; color: #888; font-size: 14px;">
+    <section class="features">
         <div class="container">
-            <div class="logo" style="font-size: 20px; margin-bottom: 10px;">HERE.</div>
-            <p>© 2026 Goen Technologia. Independence in every step.</p>
+            <h2 class="bold text-center" style="font-size: 2.2rem;">Core Technologies</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>POI & Geohash</h3>
+                    <p>Teknologi presisi untuk menandai setiap jengkal cerita di atas peta global.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-layer-group"></i>
+                    <h3>Gravity Feed</h3>
+                    <p>Algoritma konten real-time yang menarik Anda ke interaksi lokal paling relevan.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>GenRank</h3>
+                    <p>Sistem reputasi sosial yang mengukur kontribusi Anda dalam komunitas nyata.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-globe"></i>
+                    <h3>Global Scale</h3>
+                    <p>Komitmen Goen Technologia untuk membawa HOUI ke kancah internasional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="milestone-section">
+        <div class="container">
+            <h2 class="text-center bold" style="color: var(--primary-brown);">Corporate Trail</h2>
+            <div class="timeline">
+                <div class="milestone-item left">
+                    <div class="m-content">
+                        <span class="m-date">Januari 2026</span>
+                        <h3>Inisiasi HOUI</h3>
+                        <p>Lahirnya visi sosial media berbasis lokasi di bawah Goen Technologia.</p>
+                    </div>
+                </div>
+                <div class="milestone-item right">
+                    <div class="m-content">
+                        <span class="m-date">Februari 2026</span>
+                        <h3>Investment Phase</h3>
+                        <p>Submission proposal strategis ke <strong>East Ventures</strong> dan <strong>Init 6</strong>.</p>
+                    </div>
+                </div>
+                <div class="milestone-item left">
+                    <div class="m-content">
+                        <span class="m-date">Februari 2026</span>
+                        <h3>MVP Deployment</h3>
+                        <p>Penyelesaian MVP pertama dan upload ke Internal Play Store Testing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center">
+        <div class="container">
+            <p style="color: #fff; margin-bottom: 10px; font-weight: 700;">Goen Technologia</p>
+            <p>Co-founded by Taufik Ramadhan & Team.</p>
+            <p style="font-size: 12px; margin-top: 20px;">© 2026 HOUI - Every journey has a guide.</p>
         </div>
     </footer>
 
